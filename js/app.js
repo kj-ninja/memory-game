@@ -1,30 +1,12 @@
-
-
-
-
-
-
-
-
-
-// FEW QUESTIONS TO CODE REVIEVER:
+// FEW QUESTIONS TO CODE REVIEwER:
 
 // How can I add a CSS animations like Udacity provided when cards are clicked, unsuccessfully matched, and successfully matched.
-// How can I implement leaderboard
-// Any tips for that?
+// Can you tell me something about my bug with background color in modal? I set up 100% but it isnt full height.
+// About Usability is it the same thing like Responsive? Should i change something?
+// How about read me should I add something more?
+// How about event listeners order, shouldn't I put them above functions definitions?
 
-
-
-
-// TODO:
-
-// 1. JAK OGARNAC RESTART BUTTON W MOMENCIE KIEDY 1 KARTA JEST ODSLONIETA???
-// 2. Poprawic rzeczywiste wyniki z tablicy na modala
-// 3. Poprawic backgrond modala zeby byl na cala wysokosc
-
-
-
-
+// Thank you for help and advice!
 
 
 // Global scope variables
@@ -38,12 +20,17 @@ let clockId;
 let matched = 0;
 const TOTAL_PAIRS = 8;
 
-
+/*
+* Display the cards on the page
+*   - shuffle the list of cards using the provided "shuffle" method below
+*   - loop through each card and create its HTML
+*   - add each card's HTML to the page
+*/
+shuffleDeck();
 
 /*
 * Create a list that holds all of your cards
 */
-
 function shuffleDeck() {
   const cardsToShuffle = Array.from(cards);
   const shuffledCards = shuffle(cardsToShuffle);
@@ -51,18 +38,6 @@ function shuffleDeck() {
     deck.appendChild(card);
   }
 }
-shuffleDeck();
-
-
-
-/*
-* Display the cards on the page
-*   - shuffle the list of cards using the provided "shuffle" method below
-*   - loop through each card and create its HTML
-*   - add each card's HTML to the page
-*/
-
-
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -79,8 +54,6 @@ function shuffle(array) {
     return array;
 }
 
-
-
 /*
 * set up the event listener for a card. If a card is clicked:
 *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -91,8 +64,6 @@ function shuffle(array) {
 *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
 *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
 */
-
-
 
 // Add functionality to the game by addEventListeners
 deck.addEventListener('click', function (event) {
@@ -108,15 +79,13 @@ deck.addEventListener('click', function (event) {
         toggleCard(clickTarget);
         addToggleCard(clickTarget);
         if (toggledCards.length === 2) {
-          checkForMatch(clickTarget);
           addMove();
+          checkForMatch(clickTarget);
           checkScore();
-
         }
       }
     }
 });
-
 
 // Check if click is valid
 function isClickValid(clickTarget) {
@@ -141,9 +110,8 @@ function checkForMatch(clickTarget) {
   if (toggledCards[0].firstElementChild.className === toggledCards[1].firstElementChild.className) {
     toggledCards[0].classList.toggle('match');
     toggledCards[1].classList.toggle('match');
-    toggledCards = [];
+    resetToggledCards();
     matched++;
-    console.log(matched);
     if (matched === TOTAL_PAIRS) {
       gameOver();
     }
@@ -151,12 +119,10 @@ function checkForMatch(clickTarget) {
       setTimeout(() => {
         toggleCard(toggledCards[0]);
         toggleCard(toggledCards[1]);
-        toggledCards = [];
+        resetToggledCards();
       }, 1000);
   }
 }
-
-
 
 // Add a moves counter
 function addMove() {
@@ -164,8 +130,6 @@ function addMove() {
   let movesText = document.querySelector('.moves');
   movesText.innerHTML = moves;
 }
-
-
 
 // Hiding stars function
 function checkScore() {
@@ -183,8 +147,6 @@ function hideStar() {
     }
   }
 }
-
-
 
 // Add a clock to the game
 function startClock() {
@@ -211,15 +173,11 @@ function stopClock() {
   clearInterval(clockId);
 }
 
-
-
 // Toggling modal function
 function toggleModal() {
   const modal = document.querySelector('.modal_background');
   modal.classList.toggle('hide');
 }
-
-
 
 // Function which counts and display stars
 function getStars() {
@@ -232,8 +190,6 @@ function getStars() {
   }
   return starCount;
 }
-
-
 
 // Display modal stats function
 function writeModalStats() {
@@ -248,16 +204,18 @@ function writeModalStats() {
   starsStats.innerHTML = `Stars = ${stars}`;
 }
 
-
-
-// Modal buttons
+// Modal cancel button
 document.querySelector('.modal_cancel').addEventListener('click', function() {
   toggleModal();
 })
 
+// Modal replay game button
 document.querySelector('.modal_replay').addEventListener('click', replayGame);
 
-
+// Modal close button
+document.querySelector('.modal_close').addEventListener('click', function() {
+  toggleModal();
+})
 
 // Reset game button
 document.querySelector('.restart').addEventListener('click', resetGame);
@@ -269,6 +227,7 @@ function resetGame() {
   resetStars();
   resetCards();
   shuffleDeck();
+  resetToggledCards();
   matched = 0;
 }
 
@@ -292,8 +251,6 @@ function resetStars() {
   }
 }
 
-
-
 // Game over function
 function gameOver() {
   stopClock();
@@ -301,15 +258,11 @@ function gameOver() {
   toggleModal();
 }
 
-
-
 // Replay game function
 function replayGame() {
   resetGame();
   toggleModal();
 }
-
-
 
 // Reset cards function
 function resetCards() {
@@ -318,13 +271,7 @@ function resetCards() {
   }
 }
 
-
-
-
-// Add a restart game and time button
-// document.querySelector('.restart').addEventListener('click', function (e) {
-//  if (e.target.nodeName === 'I') {  // ← verifies target is desired element
-//    clearTimer();
-//    setTimer();
-//  }
-// });
+// Reset toggled cards
+function resetToggledCards() {
+  toggledCards = [];
+}
