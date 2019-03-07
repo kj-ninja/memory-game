@@ -29,7 +29,7 @@ Just clone or download my project and load **index.html** in your browser.
 
 ## Dependencies
 
-I built the Memory Game with _HTML_, styled by _CSS_ and manipulated the DOM by _JavaScript_.
+I built the Memory Game with _HTML_, styled by _CSS_ and manipulated the DOM by pure _JavaScript_.
 
 * created a deck of cards that shuffles when game is refreshed or restart
 * created a moves, time and star rating counters

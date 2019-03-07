@@ -201,11 +201,6 @@ document.querySelector('.modal_cancel').addEventListener('click', function() {
 // Modal replay game button
 document.querySelector('.modal_replay').addEventListener('click', replayGame);
 
-// Modal close button
-document.querySelector('.modal_close').addEventListener('click', function() {
-  toggleModal();
-})
-
 // Reset game button
 document.querySelector('.restart').addEventListener('click', resetGame);
 
