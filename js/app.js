@@ -1,14 +1,3 @@
-// FEW QUESTIONS TO CODE REVIEwER:
-
-// How can I add a CSS animations like Udacity provided when cards are clicked, unsuccessfully matched, and successfully matched.
-// Can you tell me something about my bug with background color in modal? I set up 100% but it isnt full height.
-// About Usability is it the same thing like Responsive? Should i change something?
-// How about read me should I add something more?
-// How about event listeners order, shouldn't I put them above functions definitions?
-
-// Thank you for help and advice!
-
-
 // Global scope variables
 let toggledCards = [];
 const deck = document.querySelector('.deck');
@@ -65,7 +54,7 @@ function shuffle(array) {
 *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
 */
 
-// Add functionality to the game by addEventListeners
+// Add functionality to the game by add event listeners
 deck.addEventListener('click', function (event) {
     const clickTarget = event.target;
     if(isClickValid(clickTarget)) {
